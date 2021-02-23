@@ -25,24 +25,20 @@
 class StrGenFrame: public MainFrame
 {
 public:
-    StrGenFrame(wxWindow *parent = NULL) : MainFrame(parent) {}
+    StrGenFrame(wxWindow *parent = nullptr);
 
     void OnCreateIni(wxCommandEvent &event);
     void OnCreateStr(wxCommandEvent &event);
     void OnExitToolOrMenuCommand(wxCommandEvent &event);
-
-    wxDECLARE_EVENT_TABLE();
 };
 
-// clang-format off
-wxBEGIN_EVENT_TABLE(StrGenFrame, wxFrame)
-EVT_MENU(wxID_EXIT,  StrGenFrame::OnExitToolOrMenuCommand)
-EVT_BUTTON(XRCID("m_buttonToIni"), StrGenFrame::OnCreateIni)
-EVT_BUTTON(XRCID("m_buttonToStr"), StrGenFrame::OnCreateStr)
-wxEND_EVENT_TABLE()
-// clang-format on
-
-
+StrGenFrame::StrGenFrame(wxWindow *parent) :
+    MainFrame(parent)
+{
+    Bind(wxEVT_COMMAND_MENU_SELECTED, &StrGenFrame::OnExitToolOrMenuCommand, this, wxID_EXIT);
+    Bind(wxEVT_BUTTON, &StrGenFrame::OnCreateIni, this, XRCID("m_buttonToIni"));
+    Bind(wxEVT_BUTTON, &StrGenFrame::OnCreateStr, this, XRCID("m_buttonToStr"));
+}
 
 void StrGenFrame::OnCreateIni(wxCommandEvent &event)
 {

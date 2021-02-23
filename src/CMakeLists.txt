@@ -50,7 +50,7 @@ target_link_libraries(ini2str PUBLIC common)
 add_executable(strgen ini2str/strgen.cpp)
 target_link_libraries(strgen ini2str)
 
-if(wxWidgets_FOUND)
+if(wxWidgets_FOUND OR wxwidgets_git_POPULATED)
     if(NOT wxWidgets_wxrc_EXECUTABLE)
         message(FATAL_ERROR "wxrc resource compiler was not found, please set wxWidgets_wxrc_EXECUTABLE manually.")
     endif()
